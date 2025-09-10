@@ -420,3 +420,27 @@ h1 span:nth-child(10) {
   opacity: 0;
   animation: textview 1s 20s ease forwards;
 }
+
+/* 右下角固定署名标签：自适应各分辨率与滚动位置 */
+.credit{
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  font-size: 12px;
+  line-height: 1;
+  color: #666;
+  background: rgba(255,255,255,0.8);
+  padding: 6px 8px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  z-index: 1000;
+  user-select: none;
+}
+@media (max-width: 480px){
+  .credit{
+    font-size: 11px;
+    right: 8px;
+    bottom: 8px;
+    padding: 5px 7px;
+  }
+}
