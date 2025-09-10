@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeachersDay</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="gif">
+    </div>
+    <div class="pop-up">
+      <div id="wrapper">
+        <div class="envelope open">
+          <div class="flap front"></div>
+          <div class="flap top"></div>
+          <div class="letter"></div>
+        </div>
+        <!-- 收件人显示区域：在信封下方显示“To {teacherName}”。
+             通过下方脚本从 URL 查询参数 teacher/name 读取并填充。
+             保持结构简单，便于后续扩展样式或交互。 -->
+        <div id="recipient" class="recipient" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="book-first"></div>
+    </div>
+
+    <script src="./confetti.js"></script>
+    <script>
+      const startit = () => {
+        setTimeout(function () {
+          confetti.start();
+        }, 2000);
+      };
+
+      const stopit = () => {
+        setTimeout(function () {
+          confetti.stop();
+        }, 7000);
+      };
+
+      startit();
+      stopit();
+
+      // 从 URL 解析教师姓名并显示在信封下方
+      // 设计目标：简单、可扩展、可读。若未来接入多语言或模板，只需替换文案与参数名映射。
+      (function () {
+        // 工具函数：安全解析查询参数
+        function getQueryParam(key) {
+          const params = new URLSearchParams(window.location.search);
+          return params.get(key);
+        }
+
+        // 兼容两种参数名：?teacher= 或 ?name=
+        const nameRaw = getQueryParam('teacher') || getQueryParam('name') || '';
+        // 解码：处理 + 为空格与 URL 编码；再做 trim，避免前后空格
+        const teacherName = nameRaw ? decodeURIComponent(nameRaw.replace(/\+/g, ' ')).trim() : '';
+
+        // 写入 DOM：仅使用 textContent，防止 XSS；无姓名时使用默认文案
+        const recipientEl = document.getElementById('recipient');
+        if (recipientEl) {
+          const finalText = teacherName ? `To ${teacherName}` : 'To Teacher';
+          recipientEl.textContent = finalText;
+        }
+      })();
+    </script>
+    <div>
+      <marquee
+        width="100%"
+        scrolldelay="60"
+        direction="right"
+        height="30px"
+        class="top"
+      >
+        😄❤️👨‍🏫⛵️😍◾◽▪🚲🚃🕉😎🤴🎈🎇⚽🧿🟧🟪🟫⬛🪀🍕🍚🍻🥥🍇🍀🛴⛴❤💦✴💯⚠♻🟨🟩🟦📶🔘🔹🕞🕧🐄🐡🦗🙎‍♂️🏇💪🙌✍💅🎡🏐🎯🏆🥈♣🎖🔩🥇🍁🏵🌹🌻🚩🏳‍🌈⛪🌇🌦🌕🌈🌊⚡💥☢🆗➰💲®⚪🟥⬜◼◻▫🔶🔶
+      </marquee>
+      <marquee width="100%" direction="right" height="30px" class="bottom">
+        😄❤️👨‍🏫⛵️😍◾◽▪🚲🚃🕉😎🤴🎈🎇⚽🧿🟧🟪🟫⬛🪀🍕🍚🍻🥥🍇🍀🛴⛴❤💦✴💯⚠♻🟨🟩🟦📶🔘🔹🕞🕧🐄🐡🦗🙎‍♂️🏇💪🙌✍💅🎡🏐🎯🏆🥈♣🎖🔩🥇🍁🏵🌹🌻🚩🏳‍🌈⛪🌇🌦🌕🌈🌊⚡💥☢🆗➰💲®⚪🟥⬜◼◻▫🔶🔶
+      </marquee>
+    </div>
+    
+    <div class="let">
+      <div class="happy">
+        <h1>
+          <span>H</span>
+          <span>A</span>
+          <span>P</span>
+          <span>P</span>
+          <span>Y</span>
+        </h1>
+      </div>
+      <div class="happy">
+        <h1 >
+          <span>T</span>
+          <span>E</span>
+          <span>A</span>
+          <span>C</span>
+          <span>H</span>
+          <span>E</span>
+          <span>R</span>
+          <span>S</span>
+        </h1>
+      </div>
+      <div class="happy">
+        <h1 >
+          <span>D</span>
+          <span>A</span>
+          <span>Y</span>
+        </h1>
+      </div>
+    </div>
+  </body>
+</html>
